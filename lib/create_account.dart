@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+//import './first.dart';
 
 class CreateAccount extends StatefulWidget {
   @override
@@ -15,55 +16,108 @@ class _CreateAccountState extends State<CreateAccount> {
     super.dispose();
   }
 
-  @override
   Widget build(BuildContext context2) {
-    return Column(children: [
-      Padding(
-        padding: const EdgeInsets.only(top: 25.0),
-        child: Center(
-          child: Text(
-            "Create a username",
-            style: TextStyle(fontSize: 25.0),
-          ),
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Create Account '),
+        centerTitle: true,
+        backgroundColor: Colors.red[600].withOpacity(0.7),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
-      Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Container(
-          decoration: BoxDecoration(
-              border: Border.all(width: 1.0, color: Colors.black26),
-              borderRadius: BorderRadius.circular(7.0)),
-          child: TextField(
-            controller: name,
-            decoration: InputDecoration(
-                border: InputBorder.none,
-                contentPadding: const EdgeInsets.all(10.0),
-                labelText: "Username",
-                labelStyle: TextStyle(fontSize: 15.0)),
-          ),
-        ),
-      ),
-      GestureDetector(
-          onTap: () {
-            if (name.text == null || name.text.length == 0) {
-              return;
-            }
-            Navigator.pop(context, name.text);
-          },
-          child: Container(
-            width: 350.0,
-            height: 50.0,
+      body: SingleChildScrollView(
+        physics: AlwaysScrollableScrollPhysics(),
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+        child: Column(children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(top: 25.0),
             child: Center(
-                child: Text(
-              "Next",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15.0,
-                  fontWeight: FontWeight.bold),
-            )),
-            decoration: BoxDecoration(
-                color: Colors.blue, borderRadius: BorderRadius.circular(7.0)),
-          ))
-    ]);
+              child: Text(
+                "Create an account it's free",
+                style: TextStyle(fontSize: 2.0),
+              ),
+            ),
+          ),
+          Padding(
+            //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
+            padding: const EdgeInsets.only(
+                left: 15.0, right: 15.0, top: 25, bottom: 0),
+            child: TextField(
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Username',
+                  hintText: ''),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+                left: 15.0, right: 15.0, top: 15, bottom: 0),
+            //padding: EdgeInsets.symmetric(horizontal: 15),
+            child: TextField(
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Phone Number',
+                  hintText: '+254'),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+                left: 15.0, right: 15.0, top: 15, bottom: 0),
+            //padding: EdgeInsets.symmetric(horizontal: 15),
+            child: TextField(
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Email Address',
+                  hintText: 'Enter valid email'),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+                left: 15.0, right: 15.0, top: 15, bottom: 15),
+            //padding: EdgeInsets.symmetric(horizontal: 15),
+            child: TextField(
+              obscureText: true,
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Password',
+                  hintText: 'Minimum of 8 charactrs'),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+                left: 15.0, right: 15.0, top: 15, bottom: 25),
+            //padding: EdgeInsets.symmetric(horizontal: 15),
+            child: TextField(
+              obscureText: true,
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Confirm Password',
+                  hintText: ''),
+            ),
+          ),
+          GestureDetector(
+              onTap: () {
+                if (name.text == null || name.text.length == 0) {
+                  return;
+                }
+                Navigator.pop(context, name.text);
+              },
+              child: Container(
+                width: 350.0,
+                height: 50.0,
+                child: Center(
+                    child: Text(
+                  " Sign up ",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 15.0,
+                      fontWeight: FontWeight.bold),
+                )),
+                decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(7.0)),
+              ))
+        ]),
+      ),
+    );
   }
 }

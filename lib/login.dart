@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import './first.dart';
+import './create_account.dart';
+import './tabs.dart';
 
 /*void main() {
   runApp(MyApp());
@@ -24,12 +26,14 @@ class _LoginDemoState extends State<LoginDemo> {
   @override
   Widget build(BuildContext context) {
     var _select;
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         //title: Text("Login Page"),
 
         title: Text('LOGIN'),
+
         centerTitle: true,
         backgroundColor: Colors.blue[600].withOpacity(0.7),
         leading: Icon(Icons.home),
@@ -66,9 +70,7 @@ class _LoginDemoState extends State<LoginDemo> {
             Padding(
               padding: const EdgeInsets.only(
                   left: 15.0, right: 15.0, top: 10, bottom: 10),
-              child: Positioned(
-                top: 0,
-                left: 0,
+              child: Container(
                 width: 200,
                 height: 100,
                 child: Image.asset('assets/images/kipchoge.jpg'), //   <-- image
@@ -103,12 +105,14 @@ class _LoginDemoState extends State<LoginDemo> {
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Email',
+                    //labelStyle: TextStyle(color: Colors.black),
                     hintText: 'Enter valid email id as abc@gmail.com'),
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(
                   left: 15.0, right: 15.0, top: 15, bottom: 0),
+
               //padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
                 obscureText: true,
@@ -116,10 +120,19 @@ class _LoginDemoState extends State<LoginDemo> {
                     border: OutlineInputBorder(),
                     labelText: 'Password',
                     hintText: 'Enter secure password'),
+
+                /*focusedBorder: UnderlineInputBorder(
+                  borderSide:(color.Colors.green)),*/
               ),
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => CreateAccount(),
+                  ),
+                );
+              },
               child: Text(
                 'Forgot Password',
                 style: TextStyle(color: Colors.blue, fontSize: 15),
@@ -129,22 +142,63 @@ class _LoginDemoState extends State<LoginDemo> {
               height: 50,
               width: 250,
               decoration: BoxDecoration(
-                  color: Colors.blue, borderRadius: BorderRadius.circular(20)),
-              /* child: TextButton(
-                onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => HomePage()));
-                },
-                child: Text(
-                  'Login',
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                ),
-              ),*/
+                  color: Colors.blue.withOpacity(0.7),
+                  borderRadius: BorderRadius.circular(20)),
+              child: TextButton(
+                  child: Text(
+                    'Login',
+                    style: TextStyle(
+                        color: Colors.white60,
+                        fontFamily: 'IndieFlower',
+                        fontSize: 20),
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => Tabs(),
+                      ),
+                    );
+                  }),
             ),
             SizedBox(
               height: 100,
             ),
-            Text('New User? Create Account'),
+            Container(
+              height: 40,
+              decoration: BoxDecoration(
+                  border: Border.all(
+                color: Colors.transparent,
+                style: BorderStyle.solid,
+                width: 1.0,
+              )),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Center(
+                    child: Image.asset('assets/images/google.jpg'),
+                  ),
+                  Center(
+                    child: Text('Login with Google'),
+                  )
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => CreateAccount(),
+                  ),
+                );
+              },
+              child: Text(
+                'New User? Create Account',
+                style: TextStyle(color: Colors.blueGrey, fontSize: 12),
+              ),
+            ),
             ElevatedButton(
                 child: Text('Go to First'),
                 onPressed: () {
