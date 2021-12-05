@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:myapp/first.dart';
 
 //import 'package:share/share.dart';
 void main() => runApp(const Tabs());
-
-/// This is the main application widget.
 
 class Tabs extends StatelessWidget {
   const Tabs({Key key}) : super(key: key);
@@ -38,19 +37,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget>
     with TickerProviderStateMixin {
   Icon customIcon = Icon(Icons.search);
   Widget customSearchBar = Text('Technician');
-  List<String> imageList = [
-    'background.jpg'
-        'boychild.jpg'
-        'dirt.jpg'
-        'laptop.jpg'
-        'mars.jpg'
-        'softwarejpg'
-        'images.jpg'
-        'kipchoge.jpg'
-        'google.jpg'
-        'image2.jpg'
-        'tools.jpg'
-  ];
+
   @override
   void initState() {
     super.initState();
@@ -96,6 +83,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget>
                   });
                 },
               ),
+              CircleAvatar(
+                  radius: (20),
+                  backgroundColor: Colors.white60,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.asset('assets/images/boychild.jpg'),
+                  )),
             ],
 
             /* Widget build(BuildContext context) {
@@ -232,46 +226,69 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget>
               child: Column(
                 children: <Widget>[
                   Container(
-                    height: 150,
-                    child: Image.asset(
-                        'assets/images/boychild.jpg'), //Text("hello"),
-                  ),
-                  Text(
-                    " Open ",
-                    style: TextStyle(
-                      color: Colors.blueGrey,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'IndieFlower',
-                    ),
-                  ),
-                  Container(
-                    height: 150,
                     child:
-                        Image.asset('assets/images/dirt.jpg'), //Text("hello"),
+                        Image.asset('assets/images/tools.jpg'), //   <-- image
+                    // width: size.width = 0.25,
                   ),
                   Text(
-                    " Mind ",
+                    "The Technician ",
                     style: TextStyle(
-                      color: Colors.blueGrey,
-                      fontSize: 20,
+                      color: Colors.black54,
+                      fontSize: 50,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'IndieFlower',
                     ),
                   ),
-                  Container(
-                    height: 150,
-                    child: Image.asset(
-                        'assets/images/kipchoge.jpg'), //Text("hello"),
+                  Image.asset('assets/images/laptop.jpg'), //   <-- image
+                  Text(
+                    "Creating Connection",
+                    style: TextStyle(
+                      color: Colors.orange,
+                      fontSize: 50,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'IndieFlower',
+                    ),
                   ),
 
-                  /*   IconButton(
-  icon:Image.asset("assets/icons/facebook_logo1.png",fit:BoxFit.contain,color: Colors.white,),
-
-        onPressed: (){
-       Share.share('check out my website https://example.com');
-        }),*/
+                  Image.asset('assets/images/background.jpg'), //   <-- image
                 ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                ),
+                child: StaggeredGridView.count(
+                  //physics: AlwaysScrollableScrollPhysics(),
+
+                  scrollDirection: Axis.vertical,
+                  crossAxisCount: 4,
+                  crossAxisSpacing: 4.0,
+                  mainAxisSpacing: 4.0,
+                  staggeredTiles: [
+                    StaggeredTile.count(4, 2),
+                    StaggeredTile.count(2, 2),
+                    StaggeredTile.count(2, 2),
+                    StaggeredTile.count(1, 2),
+                    StaggeredTile.count(2, 2),
+                    StaggeredTile.count(1, 2),
+                    StaggeredTile.count(2, 3),
+                    // StaggeredTile.count(4, 1),
+                    //StaggeredTile.extent(4, 250)
+                  ],
+                  children: <Widget>[
+                    myPhotoList('assets/images/boychild.jpg'),
+                    myPhotoList('assets/images/laptop.jpg'),
+                    myPhotoList('assets/images/mars.jpg'),
+                    myPhotoList('assets/images/software.jpg'),
+                    myPhotoList('assets/images/kipchoge.jpg'),
+                    myPhotoList('assets/images/tools.jpg'),
+                    // myPhotoList('assets/images/background.jpg'),
+                    captionText("WE ARE", "FAMILY"),
+                  ],
+                ),
               ),
             ),
             Column(children: [
@@ -317,30 +334,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget>
                       child: Image.asset(
                           'assets/images/kipchoge.jpg'), //Text("hello"),
                     ),
-                    /* Text(
-                  " The ",
-                  style: TextStyle(
-                    color: Colors.orange,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'IndieFlower',
-                  ),
-                ),*/
+
                     Container(
                       height: 250,
                       width: 100,
                       child: Image.asset(
                           'assets/images/mars.jpg'), //Text("hello"),
                     ),
-                    /* Text(
-                  "Technician",
-                  style: TextStyle(
-                    color: Colors.orange,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'IndieFlower',
-                  ),
-                ),*/
+
                     Container(
                       height: 250,
                       width: 100,
@@ -351,88 +352,58 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget>
                 ),
               ),
             ]),
-            /*singleChildScrollView(
-            physics: AlwaysScrollableScrollPhysics(),
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: <Widget>[
-                Container(
-                  height: 250,
-                  width: 100,
-                  child: Image.asset(
-                      'assets/images/kipchoge.jpg'), //Text("hello"),
-                ),
-                /* Text(
-                  " The ",
-                  style: TextStyle(
-                    color: Colors.orange,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'IndieFlower',
-                  ),
-                ),*/
-                Container(
-                  height: 250,
-                  width: 100,
-                  child: Image.asset('assets/images/mars.jpg'), //Text("hello"),
-                ),
-                /* Text(
-                  "Technician",
-                  style: TextStyle(
-                    color: Colors.orange,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'IndieFlower',
-                  ),
-                ),*/
-                Container(
-                  height: 250,
-                  width: 100,
-                  child: Image.asset(
-                      'assets/images/boychild.jpg'), //Text("hello"),
-                ),
-                //Image.asset('assets/images/background.jpg'), //   <-- image
-              ],
-            ),
-          ),*/
-            SingleChildScrollView(
-              physics: AlwaysScrollableScrollPhysics(),
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    child:
-                        Image.asset('assets/images/tools.jpg'), //   <-- image
-                    // width: size.width = 0.25,
-                  ),
-                  Text(
-                    "The Technician ",
-                    style: TextStyle(
-                      color: Colors.black54,
-                      fontSize: 50,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'IndieFlower',
-                    ),
-                  ),
-                  Image.asset('assets/images/laptop.jpg'), //   <-- image
-                  Text(
-                    "Creating Connection",
-                    style: TextStyle(
-                      color: Colors.orange,
-                      fontSize: 50,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'IndieFlower',
-                    ),
-                  ),
 
-                  Image.asset('assets/images/background.jpg'), //   <-- image
-                ],
-              ),
-            ),
             //Center(child: Image.asset('assets/images/kipchoge.jpg')),
             // Center(child: Image.asset('assets/images/mars.jpg'))
           ]),
         ));
+  }
+
+  Widget captionText(String titleText, String subText) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        child: Column(
+          children: <Widget>[
+            SizedBox(height: 8.0),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                child: Text(
+                  titleText,
+                  style: TextStyle(color: Colors.black, fontSize: 24.0),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                child: Text(
+                  subText,
+                  style: TextStyle(color: Colors.blueGrey, fontSize: 16.0),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget myPhotoList(String MyImages) {
+    if (MyImages.contains("http")) {
+      return Container(
+        child: Image.network(MyImages),
+      );
+    } else {
+      return Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            fit: BoxFit.fill,
+            image: ExactAssetImage(MyImages),
+          ),
+        ),
+      );
+    }
   }
 }

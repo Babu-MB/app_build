@@ -3,20 +3,7 @@ import './first.dart';
 import './create_account.dart';
 import './tabs.dart';
 
-/*void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: LoginDemo(),
-    );
-  }
-}*/
-
+//import './splash.dart';
 class LoginDemo extends StatefulWidget {
   @override
   _LoginDemoState createState() => _LoginDemoState();
@@ -30,10 +17,7 @@ class _LoginDemoState extends State<LoginDemo> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        //title: Text("Login Page"),
-
         title: Text('LOGIN'),
-
         centerTitle: true,
         backgroundColor: Colors.blue[600].withOpacity(0.7),
         leading: Icon(Icons.home),
