@@ -6,9 +6,6 @@ import './login.dart';
 class Splash extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // ignore: todo
-    // TODO: implement createState
-
     return SplashState();
   }
 }
@@ -16,25 +13,9 @@ class Splash extends StatefulWidget {
 class SplashState extends State<Splash> {
   // const Splash({Key key}) : super(key: key);
 
-/*  void initState() {
-    initState();
-    Future.delayed(Duration(seconds: 4), () {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => LoginDemo(),
-          ));
-    });
-  }*/
-
   void initState() {
     super.initState();
-    _navigatetohome();
-  }
-
-  _navigatetohome() async {
     Future.delayed(Duration(seconds: 2), () {
-      BuildContext context;
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -50,14 +31,18 @@ class SplashState extends State<Splash> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              height: 150,
-              width: 100,
+              height: 250,
+              width: 200,
               child: Image.asset('assets/images/mars.jpg'),
             ),
+            SizedBox(height: 200.0),
             Container(
               child: Text(
-                'Splash Screen',
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                'Powered by Electroworld',
+                style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blueGrey),
               ),
             ),
           ],

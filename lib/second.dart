@@ -1,3 +1,104 @@
+/*import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:myapp/tabs.dart';
+//import 'package:GoogleSignIn/homepage.dart';
+
+class SecondPage extends StatefulWidget {
+  SecondPage({Key key, String data}) : super(key: key);
+
+  @override
+  _SecondPageState createState() => _SecondPageState();
+}
+
+// creating firebase instance
+final FirebaseAuth auth = FirebaseAuth.instance;
+
+Future<void> signup(BuildContext context) async {
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+  final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
+  if (googleSignInAccount != null) {
+    final GoogleSignInAuthentication googleSignInAuthentication =
+        await googleSignInAccount.authentication;
+    final AuthCredential authCredential = GoogleAuthProvider.credential(
+        idToken: googleSignInAuthentication.idToken,
+        accessToken: googleSignInAuthentication.accessToken);
+
+    // Getting users credential
+    UserCredential result = await auth.signInWithCredential(authCredential);
+    // ignore: unused_local_variable
+    User user = result.user;
+
+    if (result != null) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => Tabs()));
+    } // if result not null we simply call the MaterialpageRoute,
+    // for go to the HomePage screen
+  }
+}
+
+class _SecondPageState extends State<SecondPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Colors.blue,
+              Colors.red,
+            ],
+          ),
+        ),
+        child: Card(
+          margin: EdgeInsets.only(top: 200, bottom: 200, left: 30, right: 30),
+          elevation: 20,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text(
+                "GEEKS FOR GEEKS",
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              ),
+              Padding(
+                  padding: const EdgeInsets.only(left: 20, right: 20),
+                  child: MaterialButton(
+                    color: Colors.teal[100],
+                    elevation: 10,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          height: 30.0,
+                          width: 30.0,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image:
+                                    AssetImage('assets/images/googleimage.png'),
+                                fit: BoxFit.cover),
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Text("Sign In with Google")
+                      ],
+                    ),
+
+                    // by onpressed we call the function signup function
+                    onPressed: signup(context),
+                  ))
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}*/
+
 import 'package:flutter/material.dart';
 //import 'package:myapp/login.dart';
 //import './first.dart';
@@ -16,69 +117,64 @@ class SecondPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white24,
-        appBar: AppBar(
-          title: Text("Flutter Staggered GridView Demo"),
-          centerTitle: true,
-          automaticallyImplyLeading: false,
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-            ),
-            child: StaggeredGridView.count(
-              physics: AlwaysScrollableScrollPhysics(),
-              scrollDirection: Axis.vertical,
-              crossAxisCount: 4,
-              crossAxisSpacing: 4.0,
-              mainAxisSpacing: 6.0,
-              staggeredTiles: [
-                StaggeredTile.count(4, 2),
-                StaggeredTile.count(2, 2),
-                StaggeredTile.count(2, 2),
-                StaggeredTile.count(1, 2),
-                StaggeredTile.count(2, 2),
-                StaggeredTile.count(1, 2),
-                StaggeredTile.count(2, 3),
-                StaggeredTile.count(4, 1),
-                //StaggeredTile.extent(4, 250)
-              ],
-              children: <Widget>[
-                myPhotoList('assets/images/boychild.jpg'),
-                myPhotoList('assets/images/laptop.jpg'),
-                myPhotoList('assets/images/mars.jpg'),
-                myPhotoList('assets/images/software.jpg'),
-                myPhotoList('assets/images/kipchoge.jpg'),
-                myPhotoList('assets/images/tools.jpg'),
-                myPhotoList('assets/images/background.jpg'),
-                captionText("WE ARE", "FAMILY"),
-              ],
-            ),
-          ),
-        ),
-        bottomNavigationBar: BottomAppBar(
-          child: Row(
-            children: [
-              IconButton(icon: Icon(Icons.menu), onPressed: () {}),
-              Spacer(),
-              IconButton(
-                  icon: Icon(Icons.search),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => ThirdPage(
-                          data: '',
-                        ),
-                      ),
-                    );
-                  }),
-              IconButton(icon: Icon(Icons.more_vert), onPressed: () {}),
-            ],
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Flutter Staggered GridView Demo"),
+        centerTitle: true,
+        automaticallyImplyLeading: false,
+      ),
+      body: StaggeredGridView.count(
+        primary: false,
+        physics: AlwaysScrollableScrollPhysics(),
+        scrollDirection: Axis.vertical,
+        crossAxisCount: 6,
+        shrinkWrap: true,
+        crossAxisSpacing: 4.0,
+        mainAxisSpacing: 4.0,
+        staggeredTiles: [
+          StaggeredTile.count(6, 2),
+          StaggeredTile.count(4, 2),
+          StaggeredTile.count(2, 2),
+          StaggeredTile.count(2, 2),
+          StaggeredTile.count(4, 2),
+          StaggeredTile.count(3, 2),
+          StaggeredTile.count(3, 2),
+          StaggeredTile.count(4, 2),
+          StaggeredTile.count(2, 2),
+          StaggeredTile.count(2, 1),
+          StaggeredTile.extent(4, 250)
+        ],
+        children: <Widget>[
+          myPhotoList('assets/gifs/phone.gif'),
+          myPhotoList('assets/images/boychild.jpg'),
+          myPhotoList('assets/images/laptop.jpg'),
+          myPhotoList('assets/images/mars.jpg'),
+          myPhotoList('assets/images/software.jpg'),
+          myPhotoList('assets/images/kipchoge.jpg'),
+          myPhotoList('assets/images/tools.jpg'),
+          captionText("WE ARE", "FAMILY"),
+          myPhotoList('assets/images/kipchoge.jpg'),
+          lineText("GROWTH"),
+        ],
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          children: [
+            IconButton(icon: Icon(Icons.menu), onPressed: () {}),
+            Spacer(),
+            IconButton(
+                icon: Icon(Icons.search),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ThirdPage(
+                          //data: '',
+                          ),
+                    ),
+                  );
+                }),
+            IconButton(icon: Icon(Icons.more_vert), onPressed: () {}),
+          ],
         ),
       ),
     );
@@ -90,7 +186,7 @@ class SecondPage extends StatelessWidget {
       child: Container(
         child: Column(
           children: <Widget>[
-            SizedBox(height: 10.0),
+            SizedBox(height: 5.0),
             Align(
               alignment: Alignment.centerLeft,
               child: Container(
@@ -106,6 +202,28 @@ class SecondPage extends StatelessWidget {
                 child: Text(
                   subText,
                   style: TextStyle(color: Colors.blueGrey, fontSize: 16.0),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget lineText(String subText) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        child: Column(
+          children: <Widget>[
+            SizedBox(height: 5.0),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Container(
+                child: Text(
+                  subText,
+                  style: TextStyle(color: Colors.black, fontSize: 18.0),
                 ),
               ),
             ),

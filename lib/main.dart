@@ -1,15 +1,6 @@
-///import 'dart:html';
-
-//import 'dart:async';
-
 import 'package:flutter/material.dart';
 //import 'package:myapp/login.dart';
-//import 'package:myapp/login.dart';
-//import 'package:myapp/login.dart';
-
-//import 'package:myapp/splash.dart';
-
-//import './login.dart';
+import 'package:myapp/splash.dart';
 
 import './splash.dart';
 

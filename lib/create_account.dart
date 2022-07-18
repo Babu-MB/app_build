@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-//import './first.dart';
+import './login.dart';
 
 class CreateAccount extends StatefulWidget {
   @override
@@ -16,6 +16,20 @@ class _CreateAccountState extends State<CreateAccount> {
     super.dispose();
   }
 
+  // By defaut, the checkbox is unchecked and "agree" is "false"
+  bool agree = false;
+
+  // This function is triggered when the button is clicked
+  void _doSomething() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => LoginDemo(),
+      ),
+    );
+
+    // Do something
+  }
+
   Widget build(BuildContext context2) {
     return Scaffold(
       appBar: AppBar(
@@ -28,7 +42,7 @@ class _CreateAccountState extends State<CreateAccount> {
         physics: AlwaysScrollableScrollPhysics(),
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         child: Column(children: <Widget>[
-          Padding(
+          /*Padding(
             padding: const EdgeInsets.only(top: 25.0),
             child: Center(
               child: Text(
@@ -36,7 +50,7 @@ class _CreateAccountState extends State<CreateAccount> {
                 style: TextStyle(fontSize: 2.0),
               ),
             ),
-          ),
+          ),*/
           Padding(
             //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
             padding: const EdgeInsets.only(
@@ -94,7 +108,21 @@ class _CreateAccountState extends State<CreateAccount> {
                   hintText: ''),
             ),
           ),
-          GestureDetector(
+          Material(
+            child: Checkbox(
+              value: agree,
+              onChanged: (value) {
+                setState(() {
+                  agree = value ?? false;
+                });
+              },
+            ),
+          ),
+          const Text(
+            'I have read and accept terms and conditions',
+            overflow: TextOverflow.ellipsis,
+          ),
+          /* GestureDetector(
               onTap: () {
                 if (name.text == null || name.text.length == 0) {
                   return;
@@ -115,7 +143,10 @@ class _CreateAccountState extends State<CreateAccount> {
                 decoration: BoxDecoration(
                     color: Colors.blue,
                     borderRadius: BorderRadius.circular(7.0)),
-              ))
+              )),*/
+          ElevatedButton(
+              onPressed: agree ? _doSomething : null,
+              child: const Text('Sign up'))
         ]),
       ),
     );

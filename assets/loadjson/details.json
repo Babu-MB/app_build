@@ -1,0 +1,44 @@
+[
+  {
+    "title":"User name",
+    "text":"",
+    "img": "assets/images/profile.jpg"
+  },
+
+  {
+    "title":"Brand new phones",
+    "text":"All models sold",
+      "img": "assets/images/boychild.jpg"
+    },
+    {
+      "title":"Broken screens",
+      "text":"Separation and lamination",
+      "img": "assets/images/background.jpg"
+    },
+    {
+      "title":"Phone repairs",
+      "text":"all phone models hardware repairs",
+      "img": "assets/images/mars.jpg"
+    },
+    {
+      "title":"Laptop repairs",
+      "text":"Hardware and software issues",
+      "img": "assets/images/laptop.jpg"
+    },
+    {
+      "title":"Software",
+      "text":"Solve android,ios issues",
+      "img": "assets/images/software.jpg"
+    },
+    {
+      "title":"Electronics",
+      "text":"Hardware and software issues",
+      "img": "assets/images/tools.jpg"
+    },
+
+    {
+      "title":"RAM and HardDrives",
+      "text":"SSD and hard disk ",
+      "img": "assets/images/kipchoge.jpg"
+    }
+  ]
