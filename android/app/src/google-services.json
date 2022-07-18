@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "695672430545",
+    "project_id": "the-technician",
+    "storage_bucket": "the-technician.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:695672430545:android:69a2ce1b591447ff124af0",
+        "android_client_info": {
+          "package_name": "com.flutter.technician"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "695672430545-cr67824148la2k2hrcuujgkpbnid1ql6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGzV2dblzWNJkij4e89yQTFFl5ZH0dlB0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "695672430545-cr67824148la2k2hrcuujgkpbnid1ql6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
