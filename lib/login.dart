@@ -1,15 +1,46 @@
+//import 'dart:html';
+
 import 'package:flutter/material.dart';
+//import 'package:google_sign_in/google_sign_in.dart';
+//import 'package:provider/provider.dart';
 import './first.dart';
 import './create_account.dart';
 import './tabs.dart';
+import './forgot_password.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
 
 //import './splash.dart';
+
 class LoginDemo extends StatefulWidget {
   @override
   _LoginDemoState createState() => _LoginDemoState();
 }
 
+/*class GoogleSignInProvider extends ChangeNotifier {
+  
+  final googleSignIn = GoogleSignIn();
+  GoogleSignInAccount _user;
+  GoogleSignInAccount get user => _user;
+
+  Future googleLogin() async {
+    final googleUser = await googleSignIn.signIn();
+    if (googleUser == null) return;
+    _user = googleUser;
+
+    final googleAuth = await googleUser.authentication;
+
+    final Credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+    await FirebaseAuth.instance.signInWithCredential(Credential);
+
+    notifyListeners();
+  }
+}*/
+
 class _LoginDemoState extends State<LoginDemo> {
+//  class GoogleSignIn extends State{
   @override
   Widget build(BuildContext context) {
     var _select;
@@ -23,7 +54,7 @@ class _LoginDemoState extends State<LoginDemo> {
         leading: Icon(Icons.home),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         actions: [
-          Icon(Icons.ac_unit),
+          // Icon(Icons.ac_unit),
           PopupMenuButton(
             onSelected: _select,
             itemBuilder: (BuildContext context) {
@@ -42,55 +73,25 @@ class _LoginDemoState extends State<LoginDemo> {
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
         child: Column(
           children: <Widget>[
-            /*Positioned(
-              top: 0,
-              left: 0,
-              width: 200,
-              height: 100,
-              child: Image.asset('assets/images/boychild.jpg'), //   <-- image
-              // width: size.width = 0.25,
-            ),*/
-
             Padding(
               padding: const EdgeInsets.only(
                   left: 15.0, right: 15.0, top: 10, bottom: 10),
               child: Container(
                 width: 200,
                 height: 100,
-                child: Image.asset('assets/images/kipchoge.jpg'), //   <-- image
+                child: Image.asset('assets/images/kipchoge.jpg'), //   <-- gif
                 // width: size.width = 0.25,
               ),
-              /* child: Center(
-
-
-                child: Container(
-                    width: 200,
-                    height: 150,
-
-              Positioned(
-              top: 0,
-              left: 0,
-              width: 200,
-              height: 100,
-              child: Image.asset('assets/images/boychild.jpg'), //   <-- image
-              // width: size.width = 0.25,
-            ),
-                    decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.circular(50.0)),
-                    child: Image.asset('asset/images/background.jpg')),
-              ),*/
             ),
             Padding(
-              //padding: const EdgeInsets.only(left:15.0,right: 15.0,top:0,bottom: 0),
               padding: const EdgeInsets.only(
                   left: 15.0, right: 15.0, top: 15, bottom: 0),
+              //padding: EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Email',
-                    //labelStyle: TextStyle(color: Colors.black),
-                    hintText: 'Enter valid email id as abc@gmail.com'),
+                    labelText: 'Email or phone number',
+                    hintText: 'Email or phone number'),
               ),
             ),
             Padding(
@@ -118,8 +119,8 @@ class _LoginDemoState extends State<LoginDemo> {
                 );
               },
               child: Text(
-                'Forgot Password',
-                style: TextStyle(color: Colors.blue, fontSize: 15),
+                'New User? Create Account',
+                style: TextStyle(color: Colors.blueGrey, fontSize: 12),
               ),
             ),
             Container(
@@ -145,9 +146,25 @@ class _LoginDemoState extends State<LoginDemo> {
                   }),
             ),
             SizedBox(
-              height: 100,
+              height: 20,
             ),
-            Container(
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => ForgotPassword(),
+                  ),
+                );
+              },
+              child: Text(
+                'Forgoten password',
+                style: TextStyle(color: Colors.blue, fontSize: 15),
+              ),
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            /*Container(
               height: 40,
               decoration: BoxDecoration(
                   border: Border.all(
@@ -158,30 +175,43 @@ class _LoginDemoState extends State<LoginDemo> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Center(
-                    child: Image.asset('assets/images/google.jpg'),
+                  /*ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: Colors.white,
+                          onPrimary: Colors.black,
+                          minimumSize: Size(double.infinity, 50)),
+                      child: Text('Sign in with Google'),
+                      onPressed: () {
+                        final provider = Provider.of<GoogleSignInProvider>(
+                            context,
+                            listen: false);
+                        provider.googleLogin();
+                        /*Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => FirstPage(),
+                          ),
+                        );*/
+                      }),*/
+                  Image(
+                    image: AssetImage("assets/images/google.jpg"),
+                    height: 35.0,
                   ),
-                  Center(
-                    child: Text('Login with Google'),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Text(
+                      'Sign in with Google',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.black54,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   )
                 ],
               ),
-            ),
+            ),*/
             SizedBox(
               height: 15,
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => CreateAccount(),
-                  ),
-                );
-              },
-              child: Text(
-                'New User? Create Account',
-                style: TextStyle(color: Colors.blueGrey, fontSize: 12),
-              ),
             ),
             ElevatedButton(
                 child: Text('Go to First'),
