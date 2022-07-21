@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:myapp/tabs.dart';
+import 'package:myapp/third.dart';
 //import 'package:GoogleSignIn/homepage.dart';
 
 class SecondPage extends StatefulWidget {
@@ -89,7 +90,7 @@ class _SecondPageState extends State<SecondPage> {
                     ),
 
                     // by onpressed we call the function signup function
-                    onPressed: signup(context),
+                    onPressed: ThirdPage(),
                   ))
             ],
           ),
@@ -97,7 +98,9 @@ class _SecondPageState extends State<SecondPage> {
       ),
     );
   }
-}*/
+}
+
+*/
 
 import 'package:flutter/material.dart';
 //import 'package:myapp/login.dart';

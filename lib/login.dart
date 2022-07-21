@@ -1,5 +1,6 @@
 //import 'dart:html';
 
+//import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 //import 'package:google_sign_in/google_sign_in.dart';
 //import 'package:provider/provider.dart';
@@ -11,36 +12,50 @@ import './forgot_password.dart';
 
 //import './splash.dart';
 
+/*void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // initializing the firebase app
+  await Firebase.initializeApp();
+
+  // calling of runApp
+  // runApp(GoogleSignIn());
+}*/
+
 class LoginDemo extends StatefulWidget {
   @override
   _LoginDemoState createState() => _LoginDemoState();
 }
 
-/*class GoogleSignInProvider extends ChangeNotifier {
-  
-  final googleSignIn = GoogleSignIn();
-  GoogleSignInAccount _user;
-  GoogleSignInAccount get user => _user;
-
-  Future googleLogin() async {
-    final googleUser = await googleSignIn.signIn();
-    if (googleUser == null) return;
-    _user = googleUser;
-
-    final googleAuth = await googleUser.authentication;
-
-    final Credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-    await FirebaseAuth.instance.signInWithCredential(Credential);
-
-    notifyListeners();
-  }
-}*/
-
 class _LoginDemoState extends State<LoginDemo> {
-//  class GoogleSignIn extends State{
+// function to implement the google signin
+
+// creating firebase instance
+  /* final FirebaseAuth auth = FirebaseAuth.instance;
+
+  Future<void> signup(BuildContext context) async {
+    final GoogleSignIn googleSignIn = GoogleSignIn();
+    final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
+    if (googleSignInAccount != null) {
+      final GoogleSignInAuthentication googleSignInAuthentication =
+          await googleSignInAccount.authentication;
+      final AuthCredential authCredential = GoogleAuthProvider.credential(
+          idToken: googleSignInAuthentication.idToken,
+          accessToken: googleSignInAuthentication.accessToken);
+
+      // Getting users credential
+      UserCredential result = await auth.signInWithCredential(authCredential);
+      // ignore: unused_local_variable
+      User user = result.user;
+
+      if (result != null) {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => LoginDemo()));
+      } // if result not null we simply call the MaterialpageRoute,
+      // for go to the HomePage screen
+    }
+  }*/
+
   @override
   Widget build(BuildContext context) {
     var _select;
@@ -164,7 +179,7 @@ class _LoginDemoState extends State<LoginDemo> {
             SizedBox(
               height: 50,
             ),
-            /*Container(
+            Container(
               height: 40,
               decoration: BoxDecoration(
                   border: Border.all(
@@ -175,22 +190,14 @@ class _LoginDemoState extends State<LoginDemo> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  /*ElevatedButton(
+                  /* ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           primary: Colors.white,
                           onPrimary: Colors.black,
                           minimumSize: Size(double.infinity, 50)),
                       child: Text('Sign in with Google'),
                       onPressed: () {
-                        final provider = Provider.of<GoogleSignInProvider>(
-                            context,
-                            listen: false);
-                        provider.googleLogin();
-                        /*Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => FirstPage(),
-                          ),
-                        );*/
+                        //signup(context);
                       }),*/
                   Image(
                     image: AssetImage("assets/images/google.jpg"),
@@ -209,7 +216,7 @@ class _LoginDemoState extends State<LoginDemo> {
                   )
                 ],
               ),
-            ),*/
+            ),
             SizedBox(
               height: 15,
             ),
