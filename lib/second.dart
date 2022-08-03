@@ -108,7 +108,6 @@ import 'package:flutter/material.dart';
 import './third.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-// ignore: must_be_immutable
 class SecondPage extends StatelessWidget {
   SecondPage({
     Key key,

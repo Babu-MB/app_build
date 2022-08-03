@@ -1,26 +1,26 @@
-//import 'dart:html';
-
-//import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:myapp/main.dart';
+import 'package:myapp/third.dart';
 //import 'package:google_sign_in/google_sign_in.dart';
 //import 'package:provider/provider.dart';
 import './first.dart';
 import './create_account.dart';
 import './tabs.dart';
 import './forgot_password.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
 
 //import './splash.dart';
 
-/*void main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // initializing the firebase app
   await Firebase.initializeApp();
+  runApp(MyApp());
 
   // calling of runApp
   // runApp(GoogleSignIn());
-}*/
+}
 
 class LoginDemo extends StatefulWidget {
   @override
@@ -28,6 +28,23 @@ class LoginDemo extends StatefulWidget {
 }
 
 class _LoginDemoState extends State<LoginDemo> {
+/*  Future<UserCredential> signInWithGoogle() async {
+    // Trigger the authentication flow
+    final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+
+    // Obtain the auth details from the request
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser?.authentication;
+
+    // Create a new credential
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    // Once signed in, return the UserCredential
+    return await FirebaseAuth.instance.signInWithCredential(credential);
+  }*/
 // function to implement the google signin
 
 // creating firebase instance
@@ -179,6 +196,8 @@ class _LoginDemoState extends State<LoginDemo> {
             SizedBox(
               height: 50,
             ),
+            FloatingActionButton.extended(
+                label: Text('sign in'), onPressed: (() => ThirdPage())),
             Container(
               height: 40,
               decoration: BoxDecoration(
