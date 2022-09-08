@@ -1,14 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:myapp/main.dart';
-import 'package:myapp/third.dart';
-//import 'package:google_sign_in/google_sign_in.dart';
+//import 'package:myapp/third.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 //import 'package:provider/provider.dart';
 import './first.dart';
 import './create_account.dart';
 import './tabs.dart';
 import './forgot_password.dart';
-
+import './first_screen.dart';
 //import './splash.dart';
 
 void main() async {
@@ -16,6 +17,8 @@ void main() async {
 
   // initializing the firebase app
   await Firebase.initializeApp();
+  await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+
   runApp(MyApp());
 
   // calling of runApp
@@ -27,52 +30,55 @@ class LoginDemo extends StatefulWidget {
   _LoginDemoState createState() => _LoginDemoState();
 }
 
-class _LoginDemoState extends State<LoginDemo> {
-/*  Future<UserCredential> signInWithGoogle() async {
-    // Trigger the authentication flow
-    final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+// creating firebase instance
+final FirebaseAuth auth = FirebaseAuth.instance;
 
-    // Obtain the auth details from the request
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser?.authentication;
+Future<void> signup(BuildContext context) async {
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+  final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
+  if (googleSignInAccount != null) {
+    final GoogleSignInAuthentication googleSignInAuthentication =
+        await googleSignInAccount.authentication;
+    final AuthCredential authCredential = GoogleAuthProvider.credential(
+        idToken: googleSignInAuthentication.idToken,
+        accessToken: googleSignInAuthentication.accessToken);
 
-    // Create a new credential
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
-    );
+    // Getting users credentialf
+    UserCredential result =
+        (await auth.signInWithCredential(authCredential)) as UserCredential;
+    // ignore: unused_local_variable
+    //User user = result.user;
 
-    // Once signed in, return the UserCredential
-    return await FirebaseAuth.instance.signInWithCredential(credential);
-  }*/
+    if (result != null) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => Tabs()));
+    } // if result not null we simply call the MaterialpageRoute,
+    // for go to the HomePage screen
+  }
+}
+
+// ignore: missing_return
+Future<UserCredential> signInWithGoogle() async {
+  // Trigger the authentication flow
+  final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+
+  // Obtain the auth details from the request
+  final GoogleSignInAuthentication googleAuth =
+      await googleUser?.authentication;
+
+  // Create a new credential
+  // ignore: unused_local_variable
+  final credential = GoogleAuthProvider.credential(
+    accessToken: googleAuth?.accessToken,
+    idToken: googleAuth?.idToken,
+  );
+
+  // Once signed in, return the UserCredential
+  //return await FirebaseAuth.instance.signInWithCredential(credential);
+}
 // function to implement the google signin
 
-// creating firebase instance
-  /* final FirebaseAuth auth = FirebaseAuth.instance;
-
-  Future<void> signup(BuildContext context) async {
-    final GoogleSignIn googleSignIn = GoogleSignIn();
-    final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
-    if (googleSignInAccount != null) {
-      final GoogleSignInAuthentication googleSignInAuthentication =
-          await googleSignInAccount.authentication;
-      final AuthCredential authCredential = GoogleAuthProvider.credential(
-          idToken: googleSignInAuthentication.idToken,
-          accessToken: googleSignInAuthentication.accessToken);
-
-      // Getting users credential
-      UserCredential result = await auth.signInWithCredential(authCredential);
-      // ignore: unused_local_variable
-      User user = result.user;
-
-      if (result != null) {
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => LoginDemo()));
-      } // if result not null we simply call the MaterialpageRoute,
-      // for go to the HomePage screen
-    }
-  }*/
-
+class _LoginDemoState extends State<LoginDemo> {
   @override
   Widget build(BuildContext context) {
     var _select;
@@ -196,8 +202,8 @@ class _LoginDemoState extends State<LoginDemo> {
             SizedBox(
               height: 50,
             ),
-            FloatingActionButton.extended(
-                label: Text('sign in'), onPressed: (() => ThirdPage())),
+            /*FloatingActionButton.extended(
+                label: Text('sign in'), onPressed: (() => ThirdPage())),*/
             Container(
               height: 40,
               decoration: BoxDecoration(
@@ -209,16 +215,30 @@ class _LoginDemoState extends State<LoginDemo> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  FloatingActionButton.extended(
+                    label: Text('sign in'),
+
+                    onPressed: () {
+                      signInWithGoogle().then((result) {
+                        if (result != null) {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => FirstScreen(),
+                            ),
+                          );
+                        }
+                      });
+                    },
+                    //onPressed: (() => signup)
+                  ),
                   /* ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           primary: Colors.white,
                           onPrimary: Colors.black,
                           minimumSize: Size(double.infinity, 50)),
                       child: Text('Sign in with Google'),
-                      onPressed: () {
-                        //signup(context);
-                      }),*/
-                  Image(
+                      onPressed: (() => ThirdPage())),*/
+                  /*Image(
                     image: AssetImage("assets/images/google.jpg"),
                     height: 35.0,
                   ),
@@ -232,7 +252,7 @@ class _LoginDemoState extends State<LoginDemo> {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                  )
+                  )*/
                 ],
               ),
             ),
@@ -254,3 +274,5 @@ class _LoginDemoState extends State<LoginDemo> {
     );
   }
 }
+
+class UserCredential {}
