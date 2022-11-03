@@ -5,12 +5,12 @@ import 'package:myapp/main.dart';
 //import 'package:myapp/third.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 //import 'package:provider/provider.dart';
-import './first.dart';
+//import './first.dart';
 import './create_account.dart';
 import './tabs.dart';
 import './forgot_password.dart';
 import './first_screen.dart';
-//import './splash.dart';
+import './firebase.py';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -223,7 +223,7 @@ class _LoginDemoState extends State<LoginDemo> {
                         if (result != null) {
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => FirstScreen(),
+                              builder: (context) => FirstScreen(), //FirstScreen
                             ),
                           );
                         }
@@ -264,7 +264,7 @@ class _LoginDemoState extends State<LoginDemo> {
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => FirstPage(),
+                      builder: (context) => firebase(), //FirstPage
                     ),
                   );
                 }),
