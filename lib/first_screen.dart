@@ -2,10 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:myapp/sign_in.dart';
-import 'package:myapp/tabs.dart';
+//import 'package:myapp/tabs.dart';
 //import 'package:sign_in_flutter/login_page.dart';
 //import 'package:sign_in_flutter/sign_in.dart';
-import './tabs.dart';
 
 class FirstScreen extends StatelessWidget {
   @override
@@ -54,7 +53,7 @@ class FirstScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 40),
-              RaisedButton(
+              /*RaisedButton(
                 onPressed: () {
                   signOutGoogle();
                   Navigator.of(context).pushAndRemoveUntil(
@@ -73,7 +72,7 @@ class FirstScreen extends StatelessWidget {
                 elevation: 5,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(40)),
-              )
+              )*/
             ],
           ),
         ),

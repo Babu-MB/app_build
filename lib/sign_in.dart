@@ -9,7 +9,7 @@ String name;
 String email;
 String imageUrl;
 
-Future<String> signInWithGoogle() async {
+Future<void> signInWithGoogle() async {
   await Firebase.initializeApp();
 
   final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
@@ -53,6 +53,7 @@ Future<String> signInWithGoogle() async {
 
   return null;
 }
+
 
 Future<void> signOutGoogle() async {
   await googleSignIn.signOut();
