@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 //import 'package:video_player/video_player.dart';
 
-import './second.dart';
 import './login.dart';
 
 // ignore: must_be_immutable
@@ -114,16 +113,6 @@ class FirstPage extends StatelessWidget {
               ),
 
               Image.asset('assets/images/background.jpg'), //   <-- image
-              ElevatedButton(
-                  child: Text('Go to second'),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => SecondPage(
-                            data: "Hello there from the first page!"),
-                      ),
-                    );
-                  }),
 
               FloatingActionButton(
                   backgroundColor: Colors.red[600].withOpacity(0.7),

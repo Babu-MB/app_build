@@ -9,9 +9,15 @@ import './first.dart';
 import './create_account.dart';
 import './tabs.dart';
 import './forgot_password.dart';
-import './first_screen.dart';
+//import './first_screen.dart';
 //import './firebase.py';
 
+final FirebaseAuth _auth = FirebaseAuth.instance;
+final GoogleSignIn googleSignIn = GoogleSignIn();
+
+String name;
+String email;
+String imageUrl;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -57,6 +63,57 @@ Future<void> signup(BuildContext context) async {
   }
 }
 
+Future<void> signInWithGoogle() async {
+  await Firebase.initializeApp();
+
+  final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
+  final GoogleSignInAuthentication googleSignInAuthentication =
+      await googleSignInAccount.authentication;
+
+  final AuthCredential credential = GoogleAuthProvider.credential(
+    accessToken: googleSignInAuthentication.accessToken,
+    idToken: googleSignInAuthentication.idToken,
+  );
+
+  final UserCredential authResult =
+      (await _auth.signInWithCredential(credential)) as UserCredential;
+  final User user = authResult.user;
+
+  if (user != null) {
+    // Checking if email and name is null
+    assert(user.email != null);
+    assert(user.displayName != null);
+    assert(user.photoURL != null);
+
+    name = user.displayName;
+    email = user.email;
+    imageUrl = user.photoURL;
+
+    // Only taking the first part of the name, i.e., First Name
+    if (name.contains(" ")) {
+      name = name.substring(0, name.indexOf(" "));
+    }
+
+    assert(!user.isAnonymous);
+    assert(await user.getIdToken() != null);
+
+    final User currentUser = _auth.currentUser;
+    assert(user.uid == currentUser.uid);
+
+    print('signInWithGoogle succeeded: $user');
+
+    return '$user';
+  }
+
+  return null;
+}
+
+Future<void> signOutGoogle() async {
+  await googleSignIn.signOut();
+
+  print("User Signed Out");
+}
+/*
 // ignore: missing_return
 Future<UserCredential> signInWithGoogle() async {
   // Trigger the authentication flow
@@ -75,7 +132,7 @@ Future<UserCredential> signInWithGoogle() async {
 
   // Once signed in, return the UserCredential
   //return await FirebaseAuth.instance.signInWithCredential(credential);
-}
+}*/
 // function to implement the google signin
 
 class _LoginDemoState extends State<LoginDemo> {
@@ -216,9 +273,9 @@ class _LoginDemoState extends State<LoginDemo> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   FloatingActionButton.extended(
-                    label: Text('sign in'),
+                      label: Text('sign in'),
 
-                    onPressed: () {
+                      /* onPressed: () {
                       signInWithGoogle().then((result) {
                         if (result != null) {
                           Navigator.of(context).push(
@@ -228,31 +285,8 @@ class _LoginDemoState extends State<LoginDemo> {
                           );
                         }
                       });
-                    },
-                    //onPressed: (() => signup)
-                  ),
-                  /* ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.white,
-                          onPrimary: Colors.black,
-                          minimumSize: Size(double.infinity, 50)),
-                      child: Text('Sign in with Google'),
-                      onPressed: (() => ThirdPage())),*/
-                  /*Image(
-                    image: AssetImage("assets/images/google.jpg"),
-                    height: 35.0,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: Text(
-                      'Sign in with Google',
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black54,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  )*/
+                    },*/
+                      onPressed: (() => signInWithGoogle)),
                 ],
               ),
             ),
@@ -275,4 +309,6 @@ class _LoginDemoState extends State<LoginDemo> {
   }
 }
 
-class UserCredential {}
+class UserCredential {
+  User get user => null;
+}
